@@ -1,0 +1,13 @@
+main() {
+	if (atoi(argv[1]) == 423) {
+		call strdup
+		call getegid
+		call geteuid
+		call setresgid
+		call setresuid
+		call execv  // launch /bin/dash as user level1
+	}
+	else {
+		print("No !");
+	}
+}
