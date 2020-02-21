@@ -12,6 +12,9 @@
 - `disass main` <- disassemble le main
 - `set {char}0x5555555546e4=42` <- set la valeur a l'adresse
 - `print {char[4]}0x5555555547d6` <- print la valeur a l'adresse
+- `record` <- enregistre l'etat des registre pendant le run (possible d'inverser le sens d'exec avec `reverse-continue`)
+- `pattern create 100` <- create a pattern of 100 chars
+- `pattern offset AmAA` <- show what is the offset of this pattern
 
 ## registers
 - `EAX` Stores function return values

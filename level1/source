@@ -1,0 +1,9 @@
+run() {
+	print("Good... Wait what?");
+	system("/bin/sh");
+}
+
+main {
+	char str[76];
+	gets(str);
+}
