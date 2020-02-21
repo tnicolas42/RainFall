@@ -1,0 +1,1 @@
+function nonzero_return() { RETVAL=$? ; [ $RETVAL -ne 0 ] && echo "$RETVAL "; } ; export PS1="\[\e[32m\]\u\[\e[m\] \[\e[33m\]\w\[\e[m\] \[\e[31m\]\`nonzero_return\`\[\e[m\]\$ ";
