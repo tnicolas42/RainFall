@@ -40,7 +40,7 @@ function sendsshInit() {
 	sshpass -p $2  scp -P 4242 $5 $1@$3:/tmp/bashrc
 }
 
-sendssh level0 level0 10.11.200.132 ~/Desktop/gdbRun /tmp/gdbRun
+sendssh level0 level0 10.11.200.132 ~/Desktop/peda bashrc
 ```
 ---
 
