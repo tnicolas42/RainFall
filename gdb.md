@@ -33,6 +33,13 @@
 `ebx` `ecx` `edx` `esi` `edi` `ebp` functions arguments
 
 ---
+## shell tools
+
+to print hex values
+- `perl -e 'print "A"x12 . "aa"'`
+- `echo -ne "\x2a"`
+
+---
 ## x86 and x86_64 Assembly
 
 ### mov — Move
