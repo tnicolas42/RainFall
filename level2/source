@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+p() {
+	char s[64];
+	fflush(stdout);
+	res = (unsigned int)gets(s);
+	if (res & 0xb0000000 != 0xb0000000) {
+		printf("(%p)\n", res);
+		exit(1);
+	}
+	puts(s);
+	strdup(s);
+}
+
+int main() {
+	p();
+	return;
+}

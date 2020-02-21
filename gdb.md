@@ -14,7 +14,8 @@
 - `print {char[4]}0x5555555547d6` <- print la valeur a l'adresse
 - `record` <- enregistre l'etat des registre pendant le run (possible d'inverser le sens d'exec avec `reverse-continue`)
 - `pattern create 100` <- create a pattern of 100 chars
-- `pattern offset AmAA` <- show what is the offset of this pattern
+- `pattern offset AmAA` <- show what is the offset **of** this pattern
+- `bt` <- show trace when segfault
 
 > https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
