@@ -2,7 +2,7 @@
 
 ## commands
 - `b main` <- breack point to main
-- `r arg` <- run avec arguments
+- `r <arg>` <- run avec arguments
 - `info registers eax` <- print the actual value of registers
 - `n` <- permet d’aller jusqu’à la prochaine étape, exemple jusqu’au prochain breakpoint,  jusqu’à la sortie de la fonction,
 - `c` <- va au breakpoint suivant
@@ -15,6 +15,8 @@
 - `record` <- enregistre l'etat des registre pendant le run (possible d'inverser le sens d'exec avec `reverse-continue`)
 - `pattern create 100` <- create a pattern of 100 chars
 - `pattern offset AmAA` <- show what is the offset of this pattern
+
+> https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
 ## registers
 - `EAX` Stores function return values
