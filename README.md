@@ -36,12 +36,13 @@ function sendssh() {
 }
 
 function sendsshInit() {
-	# name password ip peda bashrc
-	sshpass -p $2  scp -r -P 4242 $4 $1@$3:/tmp/peda
-	sshpass -p $2  scp -P 4242 $5 $1@$3:/tmp/bashrc
+	# name password ip bashrc
+	git clone https://github.com/longld/peda /tmp/peda
+	sshpass -p $2  scp -r -P 4242 /tmp/peda $1@$3:/tmp/peda
+	sshpass -p $2  scp -P 4242 $4 $1@$3:/tmp/bashrc
 }
 
-sendssh level0 level0 10.11.200.132 ~/Desktop/peda bashrc
+sendssh level0 level0 10.11.200.132 bashrc
 ```
 ---
 
