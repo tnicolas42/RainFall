@@ -2,7 +2,7 @@
 
 ~/.radare2rc
 ```
-e asm.cmtright=true
+e asm.cmt.right=true
 # e asm.syntax = att
 e asm.pseudo = true
 e scr.utf8 = true

@@ -17,7 +17,6 @@
 - `pattern offset AmAA` <- show what is the offset **of** this pattern
 - `bt` <- show trace when segfault
 - `r < <(perl -e 'print "A"x5')` <- lancer le binaire, et lui envoyer un flux dans stdin
-- `start` <- reload la fenetre gdb
 
 > https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
