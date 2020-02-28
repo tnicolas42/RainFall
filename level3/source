@@ -1,0 +1,14 @@
+int number = 0;  // we will change the value of this number with printf
+
+v() {
+	char str[512];
+	fgets(str, 512, stdin);
+	printf(str);
+	if (number == 64) {
+		system("/bin/sh");
+	}
+}
+
+main() {
+	v();
+}
