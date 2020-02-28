@@ -1,14 +1,24 @@
-int number = 0;  // we will change the value of this number with printf
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-v() {
-	char str[512];
+// we will change the value of this number with printf
+// 0x804988c <m>: 0x00000000
+int number = 0;
+
+void	v() {
+	char str[520];  // 0x208 -> 520
+
 	fgets(str, 512, stdin);
 	printf(str);
+
 	if (number == 64) {
+		fwrite("Wait what?!\n", 0x1, 0xc, stdout);
 		system("/bin/sh");
 	}
 }
 
-main() {
+void	main() {
 	v();
+	return;
 }
