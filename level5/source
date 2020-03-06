@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// o is declared at address 0x80484a4
 o() {
 	system("/bin/sh");
 	exit(1);
@@ -12,4 +17,5 @@ n() {
 
 main() {
 	n();
+	return;
 }
