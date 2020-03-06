@@ -1,0 +1,17 @@
+n() {
+	system("/bin/cat /home/user/level7/.pass");
+}
+
+m() {
+	puts("Nope");
+}
+
+main(argc, argv) {
+	char * s64 = malloc(64);  // if   addr is 0
+	void * ptr = malloc(4);   // then addr is 0 + 64(size) + 8(offset)
+	ptr = &m;  // ptr point on function m
+
+	strcpy(s64, argv[1]);  // copy arg on str
+
+	(*ptr)();  // call the funciton pointed by ptr (m)
+}
