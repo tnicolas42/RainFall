@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// we will change the value of this number with printf
+// 0x804988c <m>: 0x00000000
+int number = 0;
+
+void	p(char *str) {
+	printf(str);
+}
+
+void	n() {
+	char str[520];  // 0x208 -> 520
+
+	fgets(str, 512, stdin);
+
+	p(str);
+
+	if (number == 0x1025544) {
+		system("/bin/cat /home/user/level5/.pass");
+	}
+}
+
+void	main() {
+	n();
+	return;
+}
