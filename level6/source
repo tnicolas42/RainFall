@@ -1,17 +1,28 @@
-n() {
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// located at 0x08048454
+void	n() {
 	system("/bin/cat /home/user/level7/.pass");
+	return;
 }
 
-m() {
+// located at 0x08048468
+void	m() {
 	puts("Nope");
+	return;
 }
 
-main(argc, argv) {
-	char * s64 = malloc(64);  // if   addr is 0
-	void * ptr = malloc(4);   // then addr is 0 + 64(size) + 8(offset)
-	ptr = &m;  // ptr point on function m
+void	main(int arg, char **argv) {
+	char *str = malloc(64);  // if addr is 0
 
-	strcpy(s64, argv[1]);  // copy arg on str
+	void *fPtr = malloc(4);   // then addr is 0 + 64(size) + 8(offset)
+	fPtr = &m;  // fPtr point on function m
 
-	(*ptr)();  // call the funciton pointed by ptr (m)
+	strcpy(str, argv[i]); // copy arg to str
+
+	(*fPtr)();  // call the function pointed by fPtr (m)
+
+	return;
 }
