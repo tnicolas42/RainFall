@@ -1,0 +1,36 @@
+class Obj {
+	public:
+		Obj(int number) : _number(number) {}
+		virtual ~Obj() {}
+
+		int operator+(Obj & rhs) {
+			return _number + rhs._number;
+		}
+
+		void setAnnotation(char * str) {
+			int len;
+			len = strlen(str);
+			memcpy(_str, str, len);
+		}
+
+	protected:
+		char	_str[100];  // *this+0x4 (4)
+		int		_number;    // *this+0x68 (104)
+};
+
+int main(int ac, char ** av) {
+	if (ac <= 1)
+		exit();
+
+	Obj * obj1;
+	obj1 = new Obj(5);
+
+	Obj * obj2;
+	obj2 = new Obj(6);
+
+	Obj &refObj1 = *obj1;
+	Obj &refObj2 = *obj2;
+
+	refObj1.setAnnotation(av[1]);
+	return refObj2 + refObj1;
+}
