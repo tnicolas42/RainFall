@@ -1,15 +1,4 @@
-# level0
-
-On this level we have one executable (`level0`).
-```bash
-> ./level0
-Segmentation fault (core dumped)
-> ./level0 test
-No !
-```
-
-open level0 in gdb and disass main
-```nasm
+; -- main ----------------------------------------------------------------------
 0x08048ec0 <+0>: push   %ebp
 0x08048ec1 <+1>: mov    %esp,%ebp
 0x08048ec3 <+3>: and    $0xfffffff0,%esp
@@ -25,7 +14,7 @@ open level0 in gdb and disass main
 ; so eax now contain argv[1] value
 0x08048ecf <+15>: mov    (%eax),%eax  ; eax=*eax;
 0x08048ed1 <+17>: mov    %eax,(%esp)  ; set atoi parameter to argv[1]
-0x08048ed4 <+20>: call   0x8049710 <atoi> ; call atoi
+0x08048ed4 <+20>: call   0x8049710 <atoi> ; call atoi(argv[1])
 
 0x08048ed9 <+25>: cmp    $0x1a7,%eax  ; compare atoi res with 423
 0x08048ede <+30>: jne    0x8048f58 <main+152>  ; if atoi res != 423 jump
@@ -70,15 +59,3 @@ open level0 in gdb and disass main
 
 0x08048f85 <+197>: leave
 0x08048f86 <+198>: ret
-```
-
-let's try with 423 value
-```bash
-> ./level0 423
-```
-
-This will open a prompt on user level1
-```bash
-cat /home/user/level1/.pass
-1fe8a524fa4bec01ca4ea2a869af2a02260d4a7d5fe7e7c24d8617e6dca12d3a
-```

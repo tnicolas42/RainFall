@@ -29,7 +29,7 @@
 
 - `EBX` Base pointer to the data section (in DS segment)
 - `EDI` Source pointer for string operations
-- `ESI` Pointer to data in the sement pointed by the DS register; Destination pointer `for` string operations.
+- `ESI` Pointer to data in the segment pointed by the DS register; Destination pointer `for` string operations.
 - `ESP` Stack pointer (in the SS Segment) (start argument for function)
 - `EBP` Stack frame base pointer (local variables in the function) (in the SS Segment)
 
