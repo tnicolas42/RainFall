@@ -45,3 +45,23 @@ c542e581c5ba5162a85f767996e3247ed619ef6c6f7b76a59435545dc6259f8a
 ```
 c542e581c5ba5162a85f767996e3247ed619ef6c6f7b76a59435545dc6259f8a
 ```
+
+
+
+---
+```
+// auth
+x/s 0x08049aac
+// service
+x/s 0x08049ab0
+```
+
+```
+p/d 0x08049ab0 - 0x08049aac
+$1 = 4
+```
+```
+service + 28  // (32 - 4)
+
+"service 123456789abcdefghijklmnopqrs"
+```
