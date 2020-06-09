@@ -46,6 +46,9 @@ to keep stdin open
 - `(echo "hey"; cat) | ./whatever`
 - `echo "hey" > /tmp/args && cat /tmp/args - | ./whatever`
 
+dump memory at `0x80486a0` with 1 line before & 3 lines after
+- `xxd level0 | grep -B1 -A3 "00006a0"`
+
 ---
 ## x86 and x86_64 Assembly
 
