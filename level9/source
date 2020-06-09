@@ -1,10 +1,14 @@
-class Obj {
+class N {
 	public:
-		Obj(int number) : _number(number) {}
-		virtual ~Obj() {}
+		N(int number) : _number(number) {}
+		virtual ~N() {}
 
-		int operator+(Obj & rhs) {
+		int operator+(N & rhs) {
 			return _number + rhs._number;
+		}
+
+		int		operator-(N &rhs) {
+			return _number - rhs._number;
 		}
 
 		void setAnnotation(char * str) {
@@ -13,7 +17,7 @@ class Obj {
 			memcpy(_str, str, len);
 		}
 
-	protected:
+	public:
 		char	_str[100];  // *this+0x4 (4)
 		int		_number;    // *this+0x68 (104)
 };
@@ -22,15 +26,16 @@ int main(int ac, char ** av) {
 	if (ac <= 1)
 		exit();
 
-	Obj * obj1;
-	obj1 = new Obj(5);
+	N * N1;
+	N1 = new N(5);
 
-	Obj * obj2;
-	obj2 = new Obj(6);
+	N * N2;
+	N2 = new N(6);
 
-	Obj &refObj1 = *obj1;
-	Obj &refObj2 = *obj2;
+	N &refN1 = *N1;
+	N &refN2 = *N2;
 
-	refObj1.setAnnotation(av[1]);
-	return refObj2 + refObj1;
+	refN1.setAnnotation(av[1]);
+
+	return refN2 + refN1;
 }
