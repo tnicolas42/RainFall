@@ -1,74 +1,30 @@
-char * GLOBAL_STR;  // 0x08049960
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main(int ac, char ** av) {
-	char * mlc1;  // esp+0x1c
-	char * mlc3;  // esp+0x18
-	FILE * filestream;  // esp+0x8
+char	*c;
 
-	mlc1 = malloc(8);  // 08048531
-	malloc(8);  // 0804854b
-	mlc3 = malloc(8);  // 08048560
-	malloc(8);  // 0804857a
-
-/*
-eax = esp+0x1c  // 08048592 -> eax = mlc1
-eax+4 = res last malloc
-eax = ebp+0xc -> av[0];  // argument du main
-eax += 4; -> eax = av[1]
-edx = eax
-eax = eax+4 -> res last malloc
-esp+4 = edx -> eax -> av[1]
-esp = eax -> res last malloc
-
-esp = res last malloc
-esp+4 = av[1]
-*/
-	char * dst1 = mlc1;
-	char * src1 = av[1];
-	strcpy(dst1, src1);  // 080485a0
-
-/*
-eax = ebp+0xc -> av[0]  // *main+132
-eax += 8 -> av[2]
-edx = eax
-eax = esp+0x18 -> mlc3
-eax = eax+0x4
-esp = eax
-
-esp = eax -> mlc3
-esp+4 = edx -> av[2]
-*/
-	char * dst2 = mlc3;
-	char * src2 = av[2];
-	strcpy(dst2, src2);  // 080485bd
-
-/*
-esp = 0x080486eb -> "/home/user/level8/.pass"
-esp+4 = edx -> 0x080486e9 -> "r"
-*/
-	filestream = fopen("/home/user/level8/.pass", "r");  // 080485d3
-
-/*
-esp+4 = 0x44
-esp = 0x08049960 -> GLOBAL_STR
-
-filestream = 0x44;
-*/
-	char * str;
-	fgets(GLOBAL_STR, filestream);  // 080485eb
-
-/*
-esp = 0x08048703 -> "~~"
-*/
-	puts("~~");  // 080485f7
+// 0x80484f4
+void	m() {
+	printf("%s - %d\n", c, time(NULL));
 }
 
-void m() {
-	int timeAct = time();
-/*
-esp = edx -> 0x80486e0 -> "%s - %d"
-esp+4 = 0x8049960 -> GLOBAL_STR
-esp+8 = eax -> timeAct
-*/
-	printf("%s - %d", GLOBAL_STR, timeAct);
+void	main(int ac, char **av) {\
+	char	**a = malloc(8);  // esp + 0x1c, sizeof(char*) * 2
+	a[0] = 1;
+	a[1] = malloc(8);
+
+	char	**b = malloc(8);  // esp + 0x18, sizeof(char*) * 2
+	b[0] = 2;
+	b[1] = malloc(8);
+
+	strcpy(a[1], av[1]);
+	strcpy(b[1], av[2]);
+
+	FILE	*fp = fopen("/home/user/level8/.pass", "r");
+	fgets(c, 68, fp);  // 0x8049960 <c>:	0x00000000
+
+	puts("~~");  // 0xb7e927e0 <puts>:	0x893cec83
+
+	return 0;
 }

