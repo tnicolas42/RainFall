@@ -53,6 +53,34 @@ function sendsshInit() {
 
 sendsshInit level0 level0 10.11.200.132 bashrc
 ```
+
+## connection with ngrok
+Install
+```bash
+[linux]
+sudo snap install ngrok
+[osx]
+brew cask install ngrok
+```
+Create account on https://ngrok.com/ and `ngrok authtoken <token>`
+
+Launch the VM and connect:
+```bash
+# ssh -L 4243:0.0.0.0:4242 <user>@<ip> -p4242
+> ssh -L 4243:0.0.0.0:4242 level0@192.168.1.89 -p4242
+```
+In another terminal, launch ngrok:
+```bash
+> ngrok tcp 4243
+```
+
+In any term, connect with:
+```bash
+# ssh <user>@0.tcp.ngrok.io -p <port>
+> ssh level0@0.tcp.ngrok.io -p 11561
+```
+
+
 ---
 
 See more on the school [subject](fr.subject.pdf).
