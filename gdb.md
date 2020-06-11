@@ -1,17 +1,20 @@
 # GDB
 
 ## commands
-- `b main` <- breack point to main
-- `r <arg>` <- run avec arguments
-- `info registers eax` <- print the actual value of registers
-- `n` <- permet d’aller jusqu’à la prochaine étape, exemple jusqu’au prochain breakpoint,  jusqu’à la sortie de la fonction,
-- `c` <- va au breakpoint suivant
-- `finish` <- va a la fin de la fonction (renvoie la valeur de retour)
+- `break main`, `b main` <- breack point to main
+- `run <arg>`, `r <arg>` <- run avec arguments
+- `info registers [eax]`, `i r` <- print the actual value of registers
+- `info functions [name]`, `i func` <- print la liste des fonctions + l'addresse
+- `next`, `n` <- permet d’aller jusqu’à la prochaine étape, exemple jusqu’au prochain breakpoint,  jusqu’à la sortie de la fonction,
+- `continue`, `c` <- va au breakpoint suivant
+- `finish`, `fin` <- va a la fin de la fonction (renvoie la valeur de retour)
 - `si` <- jusqu’à la prochaine instruction, (la ligne suivante en asm)
 - `set $var=1` permet d’assigner une valeur à une variable, ex: set $esi = 5 pour mettre la valeur 5 à la partie 32bit du registre RSI
 - `disass main` <- disassemble le main
 - `set {char}0x5555555546e4=42` <- set la valeur a l'adresse
 - `print {char[4]}0x5555555547d6` <- print la valeur a l'adresse
+- `print/d 0x12` <- convert en int
+- `x/10c $esp+0x18` <- display 10 char at address
 - `record` <- enregistre l'etat des registre pendant le run (possible d'inverser le sens d'exec avec `reverse-continue`)
 - `pattern create 100` <- create a pattern of 100 chars
 - `pattern offset AmAA` <- show what is the offset **of** this pattern
@@ -39,7 +42,7 @@
 ## shell tools
 
 to print hex values
-- `perl -e 'print "A"x12 . "aa"'`
+- `perl -e 'print "A"x12 . "\x2a"'`
 - `echo -ne "\x2a"`
 
 to keep stdin open
@@ -48,6 +51,7 @@ to keep stdin open
 
 dump memory at `0x80486a0` with 1 line before & 3 lines after
 - `xxd level0 | grep -B1 -A3 "00006a0"`
+- radare2 -> `g` + `0x80486a0`
 
 ---
 ## x86 and x86_64 Assembly
