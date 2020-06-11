@@ -52,6 +52,19 @@ dump memory at `0x80486a0` with 1 line before & 3 lines after
 ---
 ## x86 and x86_64 Assembly
 
+### rep
+Repeat string operation:
+- `rep movs` -> used for memcpy
+- `rep stos` -> used for memset
+- `repnz scas` -> used for strlen
+
+All rep type:
+- `rep` -> repeat while equal
+- `repnz` -> repeat while nonzero
+- `repz` -> repeat while zero
+
+In string operations, the counter is stored in `ecx`, the operations are from `esi` to `edi`.
+
 ### mov — Move
 The mov instruction copies the data item referred to by its first operand (i.e. register contents, memory contents, or a constant value) into the location referred to by its second operand (i.e. a register or memory).
 

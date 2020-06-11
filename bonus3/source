@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int ac, char ** av) {
+	/*
+	esp -= 0xa0 -> 160
+	*/
+
+	FILE * file;  // esp+0x9c
+	file = fopen("/home/user/end/.pass", "r");  // *main+31
+
+	char str[128];  // esp+0x18
+	memset(str, '\0', 33);
+
+	if (file != NULL) {  // *main+71
+		if (ac != 2) {  // *main+77
+			return -1;
+		}
+	}
+	// *main+79
+	else {
+		return -1;
+	}
+	// *main+89
+
+	// file != NULL && ac == 2
+
+	// void *__ptr, size_t __size, size_t __nitems, FILE *__stream
+	fread(str, 1, 66, file);  // *main+123
+
+	int nb = 0;  // esp+0x59
+	int resAtoi = atoi(av[1]);  // *main+144
+	// mov    BYTE PTR [esp+eax*1+0x18],0x0
+	*(str + resAtoi) = '\0';
+
+	fread(str+66, 1, 65, file);  // *main+191
+	fclose(file);  // *main+206
+
+	if (strcmp(str, av[1]) == 0) {
+		execl("/bin/sh", "sh", 0);
+		return 0;
+	}
+	// *main+269
+	puts(str+66);
+	return 0;
+}
