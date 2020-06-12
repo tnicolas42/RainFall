@@ -1,30 +1,37 @@
-int main() {
-	char str1[64];  // esp+0x16 -> size = 0x40
-	pp(str1);  // *main+16
-	puts(str1);  // *main+28
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char	*p(char *dest, char *str = " - ") {
+	puts(str);
+
+	char	buff[4096];  // 0x1008 - 0x8
+	read(stdin, buff, 4096);
+
+	*strchr(buff, '\n') = '\0';
+
+	return strncpy(dest, buff, 20);
+}
+
+char	*pp(char *str) {
+	char	dest1[20];  // 0x30 - 0x1c
+	char	dest2[20];  // 0x1c - 0x8
+
+	p(dest1, " - ");
+	p(dest2, " - ");
+
+	strcpy(str, dest1);
+
+	str[strlen(str)] = ' ';
+
+	return strcat(str, dest2);
+}
+
+void	main(int ac, char **av) {
+	char str[42];  // 0x40-0x16
+
+	pp(str);
+	puts(str);
+
 	return 0;
-}
-
-void pp(char str1[64]) {
-	char str2[20];  // ebp-0x30
-	p(str2, " - ");  // *pp+22
-	char str3[20];  // ebp-0x1c
-	p(str3, " - ");  // *pp+41
-
-	// str1 = str2 + ' ' + str3;
-	strcpy(str1, str2);  // *pp+59
-	str1[strlen(str1)] = ' ';
-	strcat(str1, str3);  // *pp+122
-}
-
-void p(char * str, char * str_ = " - ") {
-	puts(str_);  // *p+15
-
-	char str4[4096];  // ebp-0x1008
-	read(stdin, str4, 4096);  // *p+45
-
-	// replace the first '\n' by a '\0'
-	*strchr(str4, '\n') = '\0';  // *p+67
-
-	strncpy(str, str4, 20);  // *p+99
 }

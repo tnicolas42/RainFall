@@ -9,9 +9,11 @@ int main(int ac, char ** av) {
 
 	char str[40];  // esp+0x14
 	memcpy(str, av[2], res*4);
+
 	if (res == 1464814662) {  // 0x574f4c46
 		execl("/bin/sh", "sh", 0);
 	}
+
 	// *main+122
 	return 0;
 }

