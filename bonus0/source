@@ -27,7 +27,7 @@ char	*pp(char *str) {
 	return strcat(str, dest2);
 }
 
-void	main(int ac, char **av) {\
+void	main(int ac, char **av) {
 	char str[42];  // 0x40-0x16
 
 	pp(str);
