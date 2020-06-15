@@ -1,67 +1,54 @@
-int nb = 0;  // 0x8049988
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-//     ebp+0x8  | ebp+0xc
-int main(int ac, char ** av) {
-	/*
-	esp -= 0xa0 -> 160
-	*/
+int language = 0;
+
+void	greetuser(char *name) {
+	char	str[72];  // 0x48
+
+	if (language == 0) {
+		str = "Hello ";
+	}
+	else if (language == 1) {
+		str = "Hyvää päivää ";
+	}
+	else if (language == 2) {
+		str = "Goedemiddag! ";
+	}
+
+	strcat(str, name);
+	puts(str);
+}
+
+void	main(int ac, char **av) {
+	// esp
+	char	str2[80]  // 0xa0 - 0x50 = 80
+	// esp + 0x50
+	char	str[76];  // (0xa0 - 0x50) - (0xa0 - 0x9c) = 76
+	// esp + 0x9c = 4
+	char	*lang = getenv("LANG");
 
 	if (ac != 3) {
 		return 1;
 	}
 
-	char str1[80];  // esp+0x50
-	memset(str1, 0, 19);  // *main+49 -> rep stos
+	bzero(str, 19);
+	strncpy(str, av[1], 40);
+	strncpy(str + 40, av[2], 32);
 
-	strncpy(str1, av[1], 40);  // *main+78
-	strncpy(str1 + 40, av[2], 32);  // *main+113
-
-	// 0x8048738 -> "LANG"
-	char * envLang;  // esp+0x9c
-	envLang = getenv("LANG");  // *main+125
-
-	if (envLang != NULL) {  // *main+145
-		if (memcmp(envLang, "fi", 2) == 0) {  // *main+173
-			// *main+182
-			nb = 1;
+	if (lang != NULL) {
+		if (memcmp(lang, "fi", 2) == 0) {
+			language = 1;
 		}
-		else if (memcmp(str1, "nl", 2) == 0) {  // *main+220
-			// *main+229
-			nb = 2;
+		else if (memcmp(lang, "nl", 2) == 0) {
+			language = 2;
 		}
 	}
-	// *main+239
-	/*
-	edx = esp -> envLang
-	ebx = str1
-	eax = 0x13 -> 19
-	edi = edx -> esp -> envLang
-	esi = ebx -> str1
-	ecx = eax -> 19
-	rep movs DWORD PTR es:[edi],DWORD PTR ds:[esi]
-	*/
-	// dst, src, size
-	// memcpy(envLang, str1, 19);
 
-	return greetuser(str1);
-}
+	for (i = 0; i < 13; ++i) {
+		str2[i] = str[i]
+	}
 
-int greetuser(char * name) {
-	char * hello;  // ebp-0x48
-	if (nb == 0) {
-		// *g+25
-		hello = "Hello ";
-	}
-	else if (nb == 1) {
-		// *g+54
-		hello = "Hyvää päivää";
-	}
-	else if (nb == 2) {
-		// *g+134
-		hello = "Goedemiddag";
-	}
-	// *g+134
-
-	strcat(hello, name);
-	puts(hello);
+	return greetuser(str2);
 }
