@@ -46,7 +46,7 @@ void	main(int ac, char **av) {
 		}
 	}
 
-	for (i = 0; i < 13; ++i) {
+	for (i = 0; i < 19; ++i) {
 		str2[i] = str[i]
 	}
 

@@ -66,11 +66,11 @@
 ; end of "if (lang != NULL) {""
 0x08048618 <+239>:	mov    %esp, %edx  ; edx = str2
 0x0804861a <+241>:	lea    0x50(%esp), %ebx  ; ebx = str
-0x0804861e <+245>:	mov    $0x13, %eax  ; eax = 13
+0x0804861e <+245>:	mov    $0x13, %eax  ; eax = 19
 0x08048623 <+250>:	mov    %edx, %edi  ; edi = str2
 0x08048625 <+252>:	mov    %ebx, %esi  ; esi = str
-0x08048627 <+254>:	mov    %eax, %ecx  ; ecx = 13
-0x08048629 <+256>:	rep movsl %ds:(%esi), %es:(%edi) for (i = 0; i < 13; str2[i] = str[i]; ++i)
+0x08048627 <+254>:	mov    %eax, %ecx  ; ecx = 19
+0x08048629 <+256>:	rep movsl %ds:(%esi), %es:(%edi) for (i = 0; i < 19; str2[i] = str[i]; ++i)
 0x0804862b <+258>:	call   0x8048484 <greetuser>  ; return greetuser()
 
 0x08048630 <+263>:	lea    -0xc(%ebp), %esp
