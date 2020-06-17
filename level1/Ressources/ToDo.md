@@ -27,7 +27,7 @@ EIP+0 found at offset: 76
 ...
 ```
 
-if we disass the code with radare2 (or any disassembler), we can see a run function. this function is never called and this function exec a shell.
+if we disass the code, we can see a run function. this function is never called and this function exec a shell.
 
 We get his adress on the disassembler (`08048444`) and we will try to send it has EIP (Instruction Pointer).
 ```bash
